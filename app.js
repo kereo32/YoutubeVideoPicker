@@ -1,0 +1,88 @@
+import axios from "axios";
+import "regenerator-runtime/runtime";
+
+let channelName = "MadSeasonShow",
+  channelId = "",
+  videos = [];
+
+const textArea = document.getElementById("channelName"),
+  videoContainer = document.getElementById("videoContainer"),
+  video = document.getElementById("video"),
+  button = document.getElementById("submitButton");
+
+const sendGetRequest = async () => {
+    console.log(channelName);
+    try {
+      const resp = await axios.get(
+        "https://www.googleapis.com/youtube/v3/channels",
+        {
+          params: {
+            part: "contentDetails",
+            forUsername: channelName,
+            key: "AIzaSyBIA7QF-efQx4Hl-3EPrj72uquQI9yDXvM",
+          },
+        }
+      );
+      console.log(resp.data.items);
+      channelId = resp.data.items[0].contentDetails.relatedPlaylists.uploads;
+      return channelId;
+    } catch (err) {
+      // Handle Error Here
+      console.error("hata 1");
+    }
+  },
+  getVideos = async (channelId, nextPageToken = "") => {
+    try {
+      const resp = await axios.get(
+        "https://www.googleapis.com/youtube/v3/playlistItems",
+        {
+          params: {
+            part: "snippet",
+            maxResults: 50,
+            playlistId: channelId,
+            key: "AIzaSyBIA7QF-efQx4Hl-3EPrj72uquQI9yDXvM",
+            pageToken: nextPageToken,
+          },
+        }
+      );
+      resp.data.items.forEach((item) => {
+        videos.push(item.snippet.resourceId.videoId);
+      });
+      if (resp.data.nextPageToken && videos.length <= 300) {
+        await getVideos(channelId, resp.data.nextPageToken);
+      } else {
+        showResult();
+      }
+    } catch (err) {
+      console.log("hata 2");
+    }
+  },
+  pickRandomVideo = () => {
+    let randomVideo = videos[Math.floor(Math.random() * videos.length)];
+    console.log(randomVideo);
+    return randomVideo;
+  },
+  showResult = () => {
+    let videoId = pickRandomVideo();
+    videoContainer.style.visibility = "visible";
+    video.src = "https://www.youtube.com/embed/" + videoId;
+  },
+  main = async () => {
+    console.log(videos);
+    getVideos(await sendGetRequest());
+  };
+button.addEventListener("click", async () => {
+  if (textArea.value == "" || textArea.value == null) {
+    alert("Please enter a channel name");
+  } else {
+    if (textArea.value != channelName) {
+      videos = [];
+      channelName = textArea.value;
+      getVideos(await sendGetRequest());
+    } else {
+      console.log("2");
+      showResult();
+    }
+  }
+});
+main();
