@@ -8,22 +8,42 @@
     <title>Youtube Video Picker</title>
 
     <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
       crossorigin="anonymous"
     />
+
+    <!-- Optional theme -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ"
+      crossorigin="anonymous"
+    />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body>
-    <h1 class="display-1" style="text-align: center">
-      Random Youtube Video Picker
-    </h1>
-    <div id="videoContainer" class="container" style="text-align: center">
+  <body style="background-color: aqua; height: 100%">
+    <div
+      id="videoContainer"
+      class="container display-4"
+      style="text-align: center"
+    >
+      <h1 class="blockquote" style="text-align: center">
+        Random Youtube Video Picker
+      </h1>
       <iframe
         id="video"
-        width="560"
-        height="315"
+        width="900"
+        height="630"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
@@ -42,20 +62,23 @@
           id="submitButton"
           class="btn btn-danger pull-right"
         >
-          GO
+          Search
         </button>
       </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-      integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-      crossorigin="anonymous"
-    ></script>
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-danger"
+          >Channel names with space usually doesn't work because of what youtube
+          api provides. Instead use the username of the respected channel.You
+          can learn the username of a channel by visiting it and checking the
+          last part of the link.</span
+        >
+        <span class="text-danger">
+          <a href="https://github.com/kereo32">Check my work out</a>
+        </span>
+      </div>
+    </footer>
     <script src="./app.js"></script>
   </body>
 </html>

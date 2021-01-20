@@ -11,7 +11,6 @@ const textArea = document.getElementById("channelName"),
   button = document.getElementById("submitButton");
 
 const sendGetRequest = async () => {
-    console.log(channelName);
     try {
       const resp = await axios.get(
         "https://www.googleapis.com/youtube/v3/channels",
@@ -23,12 +22,10 @@ const sendGetRequest = async () => {
           },
         }
       );
-      console.log(resp.data.items);
       channelId = resp.data.items[0].contentDetails.relatedPlaylists.uploads;
       return channelId;
     } catch (err) {
       // Handle Error Here
-      console.error("hata 1");
     }
   },
   getVideos = async (channelId, nextPageToken = "") => {
@@ -53,13 +50,10 @@ const sendGetRequest = async () => {
       } else {
         showResult();
       }
-    } catch (err) {
-      console.log("hata 2");
-    }
+    } catch (err) {}
   },
   pickRandomVideo = () => {
     let randomVideo = videos[Math.floor(Math.random() * videos.length)];
-    console.log(randomVideo);
     return randomVideo;
   },
   showResult = () => {
@@ -68,7 +62,6 @@ const sendGetRequest = async () => {
     video.src = "https://www.youtube.com/embed/" + videoId;
   },
   main = async () => {
-    console.log(videos);
     getVideos(await sendGetRequest());
   };
 button.addEventListener("click", async () => {
@@ -80,7 +73,6 @@ button.addEventListener("click", async () => {
       channelName = textArea.value;
       getVideos(await sendGetRequest());
     } else {
-      console.log("2");
       showResult();
     }
   }
