@@ -18,7 +18,7 @@ const sendGetRequest = async () => {
           params: {
             part: "contentDetails",
             forUsername: channelName,
-            key: "AIzaSyBIA7QF-efQx4Hl-3EPrj72uquQI9yDXvM",
+            key: "YOUR API KEY",
           },
         }
       );
